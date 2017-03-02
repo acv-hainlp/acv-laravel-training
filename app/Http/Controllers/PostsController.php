@@ -10,7 +10,7 @@ class PostsController extends Controller
 {
     public function index()
     {
-    	$posts = Post::all();
+    	$posts = Post::orderBy('created_at', 'desc')->get();
 
     	return view('posts.index',compact('posts'));
     }
@@ -27,7 +27,7 @@ class PostsController extends Controller
   		$this->validate(request(),[
   			'title' => 'required|min:2',
   			'body' => 'required|min:2',
-        'image'=> 'image',
+         'image'=> 'image',
 
   			]);
 
@@ -38,9 +38,12 @@ class PostsController extends Controller
         $file = request()->file('image'); // $ext = $file->extension();
         request()->file('image')->move(public_path('upload/posts-image'),$file->getClientOriginalName());
 
+        //create data
         Post::create([
           'title' => request('title'),
           'body' => request('body'),
+          'user_id' => auth()->id(),
+
           'image'=> 'upload/posts-image/'.$file->getClientOriginalName(),
 
         ]);
@@ -51,6 +54,7 @@ class PostsController extends Controller
         Post::create([
           'title' => request('title'),
           'body' => request('body'),
+          'user_id' => auth()->id(),
           ]);
 
       }
