@@ -4,10 +4,7 @@
 
 @section ('content')
 
-<!-- Header with image -->
-<header class="bgimg w3-display-container w3-grayscale-min" id="home" >
-  
-</header>
+
 
 <form method="post" action="/posts/{{ $post->id }}" class="w3-container w3-card-4 w3-light-grey w3-text-blue w3-margin ">
   {{ method_field('PATCH')}}

@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/','PostsController@index');
+Route::get('/','PostsController@index')->name('home');
 
 Route::get('/posts','PostsController@index');
 
@@ -26,3 +26,9 @@ Route::get('/posts/{id}/delete','PostsController@destroy');
 Route::get('/posts/{id}/edit','PostsController@edit');
 
 Route::patch('/posts/{id}','PostsController@update');
+
+//cover upload
+
+Route::get('/upload-cover','CoverController@create');
+
+Route::post('/upload-cover','CoverController@store');
