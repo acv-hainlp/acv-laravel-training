@@ -27,9 +27,6 @@ body, html {
   <div class="w3-display-bottomleft w3-center w3-padding-xlarge w3-hide-small">
     <span class="w3-tag">Open from 6am to 5pm</span>
   </div>
-  <div class="w3-display-middle w3-center">
-    <span class="w3-text-white" style="font-size:90px">My<br>Blog</span>
-  </div>
   <div class="w3-display-bottomright w3-center w3-padding-xlarge">
     <span class="w3-text-white">15 Adr street, 5015</span>
   </div>

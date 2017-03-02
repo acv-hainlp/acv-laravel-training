@@ -23,18 +23,39 @@ class PostsController extends Controller
   	public function store()
   	{	
 
+      //validation
   		$this->validate(request(),[
   			'title' => 'required|min:2',
   			'body' => 'required|min:2',
+        'image'=> 'image',
 
   			]);
 
-  		Post::create([
-  			'title' => request('title'),
-  			'body' => request('body'),
+       //save file
+      if(request()->file('image'))
+      {
 
-  			]);
+        $file = request()->file('image'); // $ext = $file->extension();
+        request()->file('image')->move(public_path('upload/posts-image'),$file->getClientOriginalName());
 
+        Post::create([
+          'title' => request('title'),
+          'body' => request('body'),
+          'image'=> 'upload/posts-image/'.$file->getClientOriginalName(),
+
+        ]);
+      } else {
+
+        //create data
+
+        Post::create([
+          'title' => request('title'),
+          'body' => request('body'),
+          ]);
+
+      }
+      
+      //redirect
   		return redirect('/posts');
   		
   	}

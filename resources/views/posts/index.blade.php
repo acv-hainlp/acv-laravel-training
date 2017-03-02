@@ -17,7 +17,10 @@
     <h5 class="w3-center w3-padding-48 "><span class="w3-tag w3-wide w3-padding-left w3-padding-right">{{ $post->title }}</span></h5>
     <p class="w3-border w3-container">{{$post->body}}</p>
     <a href="/posts/{{$post->id}}" class="w3-btn w3-grey w3-right">Show Post</a>
-    </div>
+    @if($post->image)
+   		 <img src=" /{{ $post->image }}" style="max-width:700px">
+    @endif
+  </div>
 @endforeach
 
 
