@@ -17,6 +17,12 @@ class CoverController extends Controller
         {
          	// request()->file('image')->store('cover-image');
 
+            $this->validate(request(),[
+
+                'image' => 'required|image',
+
+                ]);
+
         	$file = request()->file('image');
 
         	$ext = "png";
