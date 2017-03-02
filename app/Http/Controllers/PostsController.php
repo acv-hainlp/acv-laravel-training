@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 use App\Post;
 
 class PostsController extends Controller
@@ -50,4 +52,21 @@ class PostsController extends Controller
 
   		return redirect('/posts');
   	}
+
+  	public function edit($id)
+  	{
+  		$post = Post::find($id);
+  		return view('/posts.edit',compact('post'));
+  	}
+
+  	public function update($id)
+  	{
+  		$post = Post::find($id);
+
+  		$post->update(request()->all());
+
+  		return back();
+  	}
+
+
 }

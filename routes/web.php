@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.master');
-});
+Route::get('/','PostsController@index');
 
 Route::get('/posts','PostsController@index');
 
@@ -24,3 +22,7 @@ Route::post('/posts','PostsController@store');
 Route::get('/posts/{id}','PostsController@show');
 
 Route::get('/posts/{id}/delete','PostsController@destroy');
+
+Route::get('/posts/{id}/edit','PostsController@edit');
+
+Route::patch('/posts/{id}','PostsController@update');
