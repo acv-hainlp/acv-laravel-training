@@ -8,6 +8,12 @@ use App\Post;
 
 class PostsController extends Controller
 {
+
+    public function __construct()
+      { 
+        $this->middleware('auth',['except'=> 'index']); // If not login, only except index
+      }
+
     public function index()
     {
     	$posts = Post::orderBy('created_at', 'desc')->get();
