@@ -61,7 +61,7 @@ class PostsController extends Controller
   		$this->validate(request(),[
   			'title' => 'required|min:2',
   			'body' => 'required|min:2',
-         'image'=> 'image',
+        'image'=> 'image',
 
   			]);
 
@@ -120,9 +120,30 @@ class PostsController extends Controller
 
   	public function update($id)
   	{
+
+      //validation
+      $this->validate(request(),[
+        'title' => 'required|min:2',
+        'body' => 'required|min:2',
+        'image'=> 'image',
+        ]);
+
   		$post = Post::find($id);
 
-  		$post->update(request()->all());
+      //update the image
+      if(request()->file('image')) //if have image upload
+      {
+          $file = request()->file('image'); // get file info
+          request()->file('image')->move(public_path('upload/posts-image'),$file->getClientOriginalName()); //save file with original name
+          
+          $data = request()->all(); //save all request to $data, all() -> JSON format
+          $data['image'] = 'upload/posts-image/'.$file->getClientOriginalName(); // set image url
+                    
+          // note: unset to delete input
+
+      }      
+
+  		$post->update($data); // update record white JSON Format
 
   		return back();
   	}

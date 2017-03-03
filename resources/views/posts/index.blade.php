@@ -5,7 +5,7 @@
 @section ('content')
 
 <div class="w3-row" style="max-width: 1000px; margin: 0 auto">
-  <div class="w3-half w3-sand w3-grayscale w3-large">
+  <div class="w3-half w3-sand w3-large">
 
     @foreach ($posts as $post)
     <div class="w3-container" id="about">

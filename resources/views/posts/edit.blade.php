@@ -6,7 +6,7 @@
 
 
 
-<form method="post" action="/posts/{{ $post->id }}" class="w3-container w3-card-4 w3-light-grey w3-text-blue w3-margin ">
+<form method="post" action="/posts/{{ $post->id }}" class="w3-container w3-card-4 w3-light-grey w3-text-blue w3-margin " enctype="multipart/form-data">
   {{ method_field('PATCH')}}
   {{ csrf_field() }}
   
@@ -24,6 +24,12 @@
     <div class="w3-rest">
     <textarea name="body" class="w3-input" placeholder="{{$post->body}}" required="">{{$post->body}}</textarea>
     </div>
+  </div>
+
+  <div class="w3-row w3-section">
+    <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
+    <div class="w3-rest">
+    <input type="file" name='image'>
   </div>
 
   <p class="w3-center">

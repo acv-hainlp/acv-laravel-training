@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class CoverController extends Controller
 {
+    public function __construct()
+    {
+        return $this->middleware('auth');
+    }
+
 	public function create()
     {
     	return view('upload-cover');
