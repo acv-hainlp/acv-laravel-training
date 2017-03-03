@@ -9,7 +9,7 @@ class SessionsController extends Controller
 
 	public function __construct()
 	{	
-		$this->middleware('guest',['except'=>'destroy']); //if not guest, only destroy-logout
+		$this->middleware('guest',['except'=>['destroy']]); //if not guest, only destroy-logout
 	}
 
     public function create()

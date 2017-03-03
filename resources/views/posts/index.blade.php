@@ -16,32 +16,14 @@
         </h5>
 
         <p class="w3-border w3-container">{{$post->body}}</p>
-        <a href="/posts/{{$post->id}}" class="w3-btn w3-grey w3-right">Show Post</a>
         @if($post->image)
-            <img src=" /{{ $post->image }}" style="max-width:100%">
+        <img src=" /{{ $post->image }}" style="max-width:100%">
         @endif
+        <a href="/posts/{{$post->id}}" class="w3-btn w3-grey w3-right">Show Post</a>
       </div>
     </div>
     <hr class="w3-border">
     @endforeach
   </div>
-
-    <div class="w3-half w3-container">
-      <div class="w3-sand w3-grayscale">
-        <header class="w3-padding-48 w3-center"><h5 class="w3-tag">Archives</h5></header>
-        <ul>
-          @foreach ($archives as $stats)
-          <li><a href="/?month={{ $stats['month']}}&year={{$stats['year']}}">
-            {{ $stats['month'] .' '. $stats['year'] }} 
-            </a></li>
-          @endforeach
-        </ul>
-      </div>
-    </div>
-</div>
-
-
-
-
 
 @endsection

@@ -13,7 +13,7 @@ class PostsController extends Controller
 
     public function __construct()
       { 
-        $this->middleware('auth',['except'=> 'index']); // If not login, only except index
+        $this->middleware('auth',['except'=> ['index','show']]); // If not login, only except index and show
       }
 
     public function index()
@@ -36,17 +36,23 @@ class PostsController extends Controller
 
       // $posts = $posts->get();
 
+      //temporary ( will move to Model Post)
 
-      $archives = Post::selectRaw('
-        year(created_at) year,
-        monthname(created_at) month,
-        count(*) publish')
-      ->groupBy('year','month')
-      ->orderByRaw('min(created_at) desc')
-      ->get()
-      ->toArray();
+                // $archives = Post::selectRaw('
+                //   year(created_at) year,
+                //   monthname(created_at) month,
+                //   count(*) publish')
+                // ->groupBy('year','month')
+                // ->orderByRaw('min(created_at) desc')
+                // ->get()
+                // ->toArray();
 
-    	return view('posts.index',compact('posts','archives'));
+      // $archives = Post::archives(); //use after move temporary to model Post
+
+      // return view('posts.index',compact('posts','archives')); //not need compact&reurn archives because render direct to layouts.sidebar
+
+      return view('posts.index',compact('posts'));
+
     }
 
     public function create()
