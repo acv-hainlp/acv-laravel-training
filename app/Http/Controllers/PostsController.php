@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Post;
 
+use Carbon\Carbon;
+
 class PostsController extends Controller
 {
 
@@ -16,9 +18,35 @@ class PostsController extends Controller
 
     public function index()
     {
-    	$posts = Post::orderBy('created_at', 'desc')->get();
+      $posts = Post::latest()
+              ->filter(request(['month','year']))
+              ->get();
 
-    	return view('posts.index',compact('posts'));
+      // //default index [ OP 1 ]
+      // $posts = Post::latest(); // $posts = Post::orderBy('created_at', 'desc');
+
+      // //filter by Month and Year
+      // if ($month = request('month')) {
+      //   $posts->whereMonth('created_at', Carbon::parse($month)->month ); // February = 2, January = 1
+      // }
+
+      // if ($year = request('year')){
+      //   $posts->whereYear('created_at',$year);
+      // }
+
+      // $posts = $posts->get();
+
+
+      $archives = Post::selectRaw('
+        year(created_at) year,
+        monthname(created_at) month,
+        count(*) publish')
+      ->groupBy('year','month')
+      ->orderByRaw('min(created_at) desc')
+      ->get()
+      ->toArray();
+
+    	return view('posts.index',compact('posts','archives'));
     }
 
     public function create()
