@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 
+use App\Mail\Welcome;
+
 class RegistrationController extends Controller
 {
     public function create()
@@ -33,6 +35,10 @@ class RegistrationController extends Controller
     	//login
 
     	auth()->login($user);
+
+        //sendemail to user
+
+        \Mail::to($user)->send(new Welcome($user)); // send user view welcome w $user data
 
     	//redirect
 
