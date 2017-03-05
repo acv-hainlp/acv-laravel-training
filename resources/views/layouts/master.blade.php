@@ -36,6 +36,8 @@ body, html {
 
 @yield('content')
 
+@include ('layouts.sidebar')
+
 @include('layouts.error')
 
 <!-- Footer -->
