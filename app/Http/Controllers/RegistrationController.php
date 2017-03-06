@@ -44,6 +44,7 @@ class RegistrationController extends Controller
         //sendemail to user
 
         \Mail::to($user)->send(new Welcome($user)); // send user view welcome w $user data
+        // Mail::to($user = App\User::first())->send(new App\Mail\TestMarkDown($user)); //tinker command // php artisan vendor:publish --tag=laravel-mail
 
     	//redirect
 
