@@ -8,6 +8,11 @@ use App\Mail\Welcome;
 
 class RegistrationController extends Controller
 {
+    public function __construct()
+    {
+        return $this->middleware('admin',['except' => ['register']]);
+    }
+
     public function create()
     {
     	return view('registration.create');
